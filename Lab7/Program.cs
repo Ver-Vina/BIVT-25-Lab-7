@@ -1,11 +1,3 @@
-﻿namespace Lab7
-{
-    public class Program
-    {
-        public static void Main()
-        {
-           using System.Security.Cryptography.X509Certificates;
-
 namespace ConsoleApp1
 {
     internal class Program
@@ -19,6 +11,8 @@ namespace ConsoleApp1
             Vipechka vipechka2 = new Sochnik(100, 1, 50);
             vipechka2.Print();
             Vipechka[] vipechkas = new Vipechka[] { vipechka, sochnik };
+            Vipechka hidesochnik = new Sochnik(100, 1, 50);
+            Console.WriteLine(hidesochnik as Sochnik);
         }
     }
     public class Vipechka
@@ -65,9 +59,4 @@ namespace ConsoleApp1
             Console.WriteLine($"My sochnik: flour {_flour} egg {_egg} shugar {_shugar}");
             }
     }
-}
-
-        }
-    }
-
 }
