@@ -10,35 +10,22 @@ namespace Lab7.Green
             private string _name;
             private string _surname;
             private int[] _marks;
-        
+            private int _count = 0;
+
             // Свойства
             public string Name => _name;
             public string Surname => _surname;
             public int[] Marks => _marks.ToArray();
-            //public int[] Star
-            //{
-            //    get
-            //    {
-        
-            //        if (_stars == null || _stars.Length == 0)
-            //            return null;
-            //        int[] copy = new int[_stars.Length];
-            //        for (int i = 0; i < copy.Length; i++)
-            //        {
-            //            copy[i] = _stars[i];
-            //        }
-            //        return copy;
-            //    }
-            //}
-        
+            
+
             public double AverageMark
             {
                 get
                 {
-        
-                    if (_marks == null || _marks.Length == 0) 
+
+                    if (_marks == null || _marks.Length == 0)
                         return 0;
-        
+
                     double average = 0;
                     for (int i = 0; i < _marks.Length; i++)
                     {
@@ -52,21 +39,21 @@ namespace Lab7.Green
             {
                 get
                 {
-        
+
                     if (_marks == null || _marks.Length == 0)
                         return false;
                     for (int i = 0; i < _marks.Length; i++)
                     {
-        
+
                         if (_marks[i] < 4)
                             return false;
                     }
                     return true;
-        
+
                 }
             }
-        
-        
+
+
             // Конструктор
             public Student(string name, string surname)
             {
@@ -75,22 +62,35 @@ namespace Lab7.Green
                 _surname = surname;
                 _marks = new int[4];
             }
-        
+
             // Методы
-        
+
             public void Exam(int mark)
             {
-                for(int i = 0; i < _marks.Length; i++) 
-                {
-                    _marks[i] = mark;
+                if (mark < 2 || mark > 5) 
+                    return;
+                if (_count<= _marks.Length)
+                { 
+                    _marks[_count++] = mark;
                 }
+                   
                 
+
             }
             public static void SortByAverageMark(Student[] array)
             {
-                for (int i = 0; i<array.Length;i++)
+
+                if (array == null) 
+                    return; 
+                for (int i = 0; i < array.Length - 1; i++)
                 {
-                    array[i]= AverageMark
+                    for (int j = 0; j < array.Length - 1 - i; j++)
+                    {
+                        if (array[j].AverageMark < array[j + 1].AverageMark)
+                        {
+                            (array[j], array[j + 1]) = (array[j + 1], array[j]);
+                        }
+                    }
                 }
             }
             public void Print()
@@ -98,7 +98,9 @@ namespace Lab7.Green
                 Console.WriteLine(_name);
                 Console.WriteLine(_surname);
                 Console.WriteLine(string.Join(" ", _marks));
-                Console.WriteLine(Rating);
+                Console.WriteLine(AverageMark);
+                Console.WriteLine(IsExcellent);
+
             }
         }
     }
